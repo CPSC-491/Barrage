@@ -13,7 +13,10 @@ public class SolvingQuestion : MonoBehaviour
     private int a = Random.Range(0, 10);
     private int b = Random.Range(0, 10);
     private string[] opers = { "+", "-", "x", "/" };
-    private string q_oper = chooseOperator();
+    private int rnd_op = Random.Range(0, 4);
+    // not sure why but does not want me to choose a random operator from the list, might have to iniatilze elsewhere.
+    // not sure why but does not want me to choose a random operator from the list, might have to iniatilze elsewhere.
+    // private string q_oper = opers[1];
 
     private void Update()
     {
@@ -24,9 +27,4 @@ public class SolvingQuestion : MonoBehaviour
         return Random.Range(2, 20);
     }
 
-    static string chooseOperator()
-    {
-        int rnd_op = Random.Range(0, 4);
-        return opers[rnd_op];
-    }
 }
