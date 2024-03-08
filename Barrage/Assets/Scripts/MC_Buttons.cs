@@ -98,30 +98,34 @@ public class MC_Buttons : MonoBehaviour
     {
         int tempA = Random.Range(0, 10);
         int tempB = Random.Range(0, 10);
-        txtA.text = tempA.ToString();
-        txtB.text = tempB.ToString();
+
         txtOp.text = op[Random.Range(0,4)];
-        txtC.text = findC(tempA, tempB, txtOp.text);
+        string[] txtArr = findC(tempA, tempB, txtOp.text);
+        txtA.text = txtArr[0];
+        txtB.text = txtArr[1];
+        txtC.text = txtArr[2];
         
         Debug.Log("start button");
     }
 
-    private string findC(int tA, int tB, string op) {
+    private string[] findC(int tA, int tB, string op) {
+        string[] tArr = {tA.ToString(), tB.ToString(), "?"};
         if (op == "+") {
-            return (tA + tB).ToString();
+            tArr[2] = (tA + tB).ToString();
         }
         else if (op == "-") {
-            return (tA - tB).ToString();
+            tArr[2] = (tA - tB).ToString();
         }
         else if (op == "X")
         {
-            return (tA * tB).ToString();
+            tArr[2] = (tA * tB).ToString();
         }
         else if (op == "/")
         {
-            return "?";
+            tArr[0] = (tA * tB).ToString();
+            tArr[2] = tA.ToString();
         }
-        return "-1 error";
+        return tArr;
     }
 
      void Start()
