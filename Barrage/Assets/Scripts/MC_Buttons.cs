@@ -13,21 +13,9 @@ public class MC_Buttons : MonoBehaviour
     public GameObject tmpC;
     public GameObject tmpOp;
 
-    //public Button plus;
-    //public Button minus;
-    //public Button multiply;
-    //public Button divide;
-
-    // MC Button Settings
-    //public Color wantedColor;
-    //private Color originalColor;
-    //private ColorBlock cb;
-
-    // Game Variables (what we want them to display at start)
-    public int displayA;
-    public int displayB;
-    public int displayC;
-    public string displayOp;
+    [SerializeField] private Image opBackground;
+    [SerializeField] private Color rightC;
+    [SerializeField] private Color wrongC;
 
     string[] op = { "+", "-", "X", "/" };
 
@@ -37,75 +25,74 @@ public class MC_Buttons : MonoBehaviour
     TextMeshProUGUI txtC;
     TextMeshProUGUI txtOp;
 
-
-
+    string tempOp;
 
     // These button methods are to update the game when they are clicked.
     // If correct the button should light up green and so should the answer
     // If incorrect the button should become red
     public void plus_button() 
     {
-        if (txtOp.text == "+") {
-            Debug.Log("This is the correct answer!");
+        if (tempOp == "+") {
+            correctAnswer();
         }
         else
         {
-            Debug.Log("Sorry, incorrect");
+            wrongAnswer();
         }
-        Debug.Log("plus button");
+        txtOp.text = "+";
     }
 
     public void minus_button() 
     {
-        if (txtOp.text == "-")
+        if (tempOp == "-")
         {
-            Debug.Log("This is the correct answer!");
+            correctAnswer();
         }
         else
         {
-            Debug.Log("Sorry, incorrect");
+            wrongAnswer();
         }
-        Debug.Log("minus button");
+        txtOp.text = "-";
     }
 
     public void mul_button()
     {
-        if (txtOp.text == "X")
+        if (tempOp == "X")
         {
-            Debug.Log("This is the correct answer!");
+            correctAnswer();
         }
         else
         {
-            Debug.Log("Sorry, incorrect");
+            wrongAnswer();
         }
-        Debug.Log("multiply button");
+        txtOp.text = "X";
     }
 
     public void div_button()
     {
-        if (txtOp.text == "/")
+        if (tempOp == "/")
         {
-            Debug.Log("This is the correct answer!");
+            correctAnswer();
         }
         else
         {
-            Debug.Log("Sorry, incorrect");
+            wrongAnswer();
         }
-        Debug.Log("divide button");
+        txtOp.text = "/";
     }
 
-    public void start_button() 
+    public void reset_button() 
     {
-        int tempA = Random.Range(0, 10);
-        int tempB = Random.Range(0, 10);
-
-        txtOp.text = op[Random.Range(0,4)];
-        string[] txtArr = findC(tempA, tempB, txtOp.text);
+        txtOp.text = "?";
+        int tempA = Random.Range(1, 10);
+        int tempB = Random.Range(1, 10);
+        tempOp =  op[Random.Range(0,4)];
+        string[] txtArr = findC(tempA, tempB, tempOp);
         txtA.text = txtArr[0];
         txtB.text = txtArr[1];
         txtC.text = txtArr[2];
         
-        Debug.Log("start button");
+        Debug.Log("reset button");
     }
 
     private string[] findC(int tA, int tB, string op) {
@@ -128,12 +115,38 @@ public class MC_Buttons : MonoBehaviour
         return tArr;
     }
 
-     void Start()
+    //This is to hide a game element
+    //public void showMark() { 
+    //    if (qMark.activeInHierarchy == false)
+    //    {
+    //        qMark.SetActive(true);
+    //    }
+    //}
+
+    //public void hideMark() { 
+    //    if (qMark.activeInHierarchy == true) { qMark.SetActive(false); }
+    //
+
+    public void correctAnswer() {
+        opBackground.color = rightC;
+        Debug.Log("Correct Answer");
+    }
+
+    public void wrongAnswer() {
+        //change it so that it becomes red when wrong answer is clicked
+        opBackground.color = wrongC;
+        Debug.Log("Sorry, incorrect");
+    }
+
+     private void Start()
     {
         // This gets text component to edit text
         txtA = tmpA.GetComponent<TextMeshProUGUI>();
         txtB = tmpB.GetComponent<TextMeshProUGUI>();
         txtC = tmpC.GetComponent<TextMeshProUGUI>();
         txtOp = tmpOp.GetComponent<TextMeshProUGUI>();
+
+        wrongC.a = 1;
+        rightC.a = 1;
     }
 }
