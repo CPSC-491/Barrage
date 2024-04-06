@@ -11,7 +11,7 @@ public class Troop : MonoBehaviour
 
     [Header("Attribute")]
     [SerializeField] private float troopRange = 3f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 200f;
 
     private Transform target;
 
