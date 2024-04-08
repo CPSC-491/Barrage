@@ -28,6 +28,9 @@ public class Plot : MonoBehaviour
     private void OnMouseDown()
     {
         //current time is 7:16
-        Debug.Log("Build Troop Here: " + name);
+        if (troop != null) return;
+
+        GameObject tempTroop = TroopManager.main.GetSelectedTroop();
+        troop = Instantiate(tempTroop, transform.position, Quaternion.identity);
     }
 }
