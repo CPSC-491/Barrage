@@ -681,6 +681,7 @@ MonoBehaviour:
   - {fileID: 2135954800}
   - {fileID: 1177125423}
   - {fileID: 1688589101}
+  money: 0
 --- !u!114 &150293368
 MonoBehaviour:
   m_ObjectHideFlags: 0
