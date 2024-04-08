@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Rendering;
 
 public class Troop : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform troopRotatePoint;
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
 
     [Header("Attribute")]
     [SerializeField] private float troopRange = 3f;
     [SerializeField] private float rotationSpeed = 200f;
+    [SerializeField] private float pps = 1f; //projectiles per second
 
     private Transform target;
+    private float timeToFire;
 
     private void Update()
     {
@@ -26,7 +31,20 @@ public class Troop : MonoBehaviour
 
         if (!CheckTargetIsInRange()) {
             target = null;
+        } else
+        {
+            timeToFire += Time.deltaTime;
+
+            if (timeToFire >= 1f / pps)
+            {
+                Shoot();
+                timeToFire = 0f;
+            }
         }
+    }
+
+    private void Shoot() {
+        Debug.Log("Shoot");
     }
 
     private void FindTarget() {
