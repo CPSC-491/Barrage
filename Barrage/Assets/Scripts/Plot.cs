@@ -27,10 +27,18 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //current time is 7:16
         if (troop != null) return;
 
-        GameObject tempTroop = TroopManager.main.GetSelectedTroop();
-        troop = Instantiate(tempTroop, transform.position, Quaternion.identity);
+        TroopTower tempTroop = TroopManager.main.GetSelectedTroop();
+
+        if (tempTroop.cost > LevelManager.main.money) 
+        {
+            Debug.Log("You cant afford this");
+            return;
+        }
+
+        LevelManager.main.SpendMoney(tempTroop.cost);
+
+        troop = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
     }
 }

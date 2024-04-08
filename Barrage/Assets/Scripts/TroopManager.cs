@@ -7,7 +7,7 @@ public class TroopManager : MonoBehaviour
     public static TroopManager main;
 
     [Header("References")]
-    [SerializeField] private GameObject[] troopPrefabs;
+    [SerializeField] private TroopTower[] troopTowers;
 
     private int selectedTroop = 0;
 
@@ -16,8 +16,13 @@ public class TroopManager : MonoBehaviour
         main = this;
     }
 
-    public GameObject GetSelectedTroop()
+    public TroopTower GetSelectedTroop()
     {
-        return troopPrefabs[selectedTroop];
+        return troopTowers[selectedTroop];
+    }
+
+    public void setSelectedTroop(int _selectedTroop)
+    {
+        selectedTroop = _selectedTroop;
     }
 }

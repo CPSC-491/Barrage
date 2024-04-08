@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: -265721255, guid: 7442e113625f9ee40bb68e0f0a9293d6, type: 3}
-  m_Color: {r: 0.4009434, g: 0.44165117, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.12156863, b: 0.101960786, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8498635947967842189}
   - component: {fileID: 4693775765849350003}
   m_Layer: 0
-  m_Name: Troop
+  m_Name: TestTroop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,9 +200,9 @@ MonoBehaviour:
     m_Bits: 64
   projectilePrefab: {fileID: 2194660673358923830, guid: b3f4eeedc5d1abe45902aae5e8bcb940, type: 3}
   projectileSpawnPoint: {fileID: 4197772480358630138}
-  troopRange: 3
+  troopRange: 10
   rotationSpeed: 200
-  pps: 1
+  pps: 0.5
 --- !u!1 &5081867598285430165
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -436754826, guid: 7442e113625f9ee40bb68e0f0a9293d6, type: 3}
-  m_Color: {r: 0, g: 0.022947311, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.11828027, b: 0.0990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
