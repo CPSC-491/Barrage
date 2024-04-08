@@ -43,11 +43,15 @@ public class Troop : MonoBehaviour
         }
     }
 
-    private void Shoot() {
-        Debug.Log("Shoot");
+    private void Shoot() 
+    {
+        GameObject projectileObj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile projectileScript = projectileObj.GetComponent<Projectile>();
+        projectileScript.SetTarget(target);
     }
 
-    private void FindTarget() {
+    private void FindTarget() 
+    {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, troopRange, (Vector2)transform.position, 0f, enemyMask);
 
         if (hits.Length > 0) {
@@ -55,14 +59,16 @@ public class Troop : MonoBehaviour
         }
 
     }
-    private void RotateTowardsTarget() {
+    private void RotateTowardsTarget() 
+    {
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         troopRotatePoint.rotation = Quaternion.RotateTowards(troopRotatePoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private bool CheckTargetIsInRange() {
+    private bool CheckTargetIsInRange() 
+    {
        return Vector2.Distance(target.position, transform.position) <= troopRange;
     }
     private void OnDrawGizmosSelected()

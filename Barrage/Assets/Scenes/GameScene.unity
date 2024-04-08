@@ -646,7 +646,7 @@ Transform:
   m_GameObject: {fileID: 150293365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05546871, y: 2.8045976, z: -0.012377268}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -700,8 +700,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 708998175374808153, guid: a3b1a75ddc3f46f41b588b22464ec85b, type: 3}
   baseEnemies: 8
-  enemiesPerSecond: 2
-  timeBetweenWaves: 1
+  enemiesPerSecond: 0.5
+  timeBetweenWaves: 3
   difficulty: 0.75
 --- !u!1001 &159202433
 PrefabInstance:
@@ -10925,7 +10925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8498635947967842189, guid: b74e2399e4026de4c8fb81241e9569cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 8498635947967842189, guid: b74e2399e4026de4c8fb81241e9569cd, type: 3}
       propertyPath: m_LocalPosition.z
