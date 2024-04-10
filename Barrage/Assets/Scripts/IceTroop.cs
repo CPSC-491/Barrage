@@ -10,7 +10,7 @@ public class IceTroop : MonoBehaviour
 
     [Header("Attribute")]
     [SerializeField] private float troopRange = 3f;
-    [SerializeField] private float aps = 4f; //attacks per second
+    [SerializeField] private float aps = 0.25f; //attacks per second //attacks every 4s
     [SerializeField] private float freezeTime = 1f;
 
     private float timeToFire;
