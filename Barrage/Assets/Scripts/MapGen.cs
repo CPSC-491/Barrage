@@ -21,4 +21,9 @@ public class MapGen : MonoBehaviour
             }
         }
     }
+    //watch this video for path gen
+    //https://www.youtube.com/watch?v=P1iIxS8hlhI&ab_channel=Garnet 
+
+    //watch this video for ui elements
+    //https://www.youtube.com/watch?v=3g7BtlBCRj0&list=PLfX6C2dxVyLz_w9AWxvkRKc2zUvBl0GIl&index=8&ab_channel=MuddyWolf
 }
