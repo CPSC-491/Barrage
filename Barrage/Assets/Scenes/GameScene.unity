@@ -3593,6 +3593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plot (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 2960072413183014241, guid: 04dc8ac37d57991479a0f1e60a7a13a5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4864188774875009545, guid: 04dc8ac37d57991479a0f1e60a7a13a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
