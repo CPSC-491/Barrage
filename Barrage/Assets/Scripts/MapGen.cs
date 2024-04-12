@@ -1,26 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MapGen : MonoBehaviour
 {
     [SerializeField] private int mapWidth, mapHeight;
     [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private Sprite emptyTile, downLeft, leftRight, leftUp, rightDown, upDown, upRight;
 
-    private void Awake()
-    {
-        GenerateMap();
-    }
-    void GenerateMap()
-    {
-        for (int x = -8; x <= mapWidth; x++)
-        {
-            for (int y = -5; y <= mapHeight; y++)
-            {
-                GameObject tile = Instantiate(tilePrefab, new Vector3(x,y, 0), Quaternion.identity);
-            }
-        }
-    }
+    private int curX;
+    private int curY;
+    private Sprite spriteToUse;
+    private bool forceDirectionChange = false;
+
+    private bool continueLeft = false;
+    private bool continueRight = false;
+    private int currentCount = 0;
+
     //watch this video for path gen
     //https://www.youtube.com/watch?v=P1iIxS8hlhI&ab_channel=Garnet 
 

@@ -539,10 +539,10 @@ RectTransform:
   - {fileID: 1261519532}
   m_Father: {fileID: 224286469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: -115}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &94156577
 MonoBehaviour:
@@ -1002,9 +1002,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c741eec9eb71a549b9e58a18996d6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 8
-  mapHeight: 5
+  mapWidth: 15
+  mapHeight: 11
   tilePrefab: {fileID: 2960072413183014241, guid: 58400ee05c1fb28498c928e4a6614fce, type: 3}
+  emptyTile: {fileID: -230263671, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  downLeft: {fileID: -1698260763, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  leftRight: {fileID: 2042548372, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  leftUp: {fileID: 507101768, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  rightDown: {fileID: 1488505493, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  upDown: {fileID: -1133453966, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  upRight: {fileID: 953523159, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
 --- !u!1001 &159202433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3389,7 +3396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &546472742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6811,10 +6818,10 @@ RectTransform:
   - {fileID: 325988173}
   m_Father: {fileID: 224286469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: -45}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255829086
 MonoBehaviour:
@@ -9457,7 +9464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1909684186
 Transform:
   m_ObjectHideFlags: 0
