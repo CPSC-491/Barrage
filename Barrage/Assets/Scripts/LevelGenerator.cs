@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private int mapWidth, mapHeight;
 
@@ -48,8 +48,8 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                float xOffset = (x + y) / 2f;
-                float yOffset = (x - y) / 4f;
+                float xOffset = x * 1f;
+                float yOffset = y * 1f;
                 GameObject newTile = Instantiate(tileReference, new Vector2(xOffset, yOffset), Quaternion.identity);
                 tileData[x, y].spriteRenderer = newTile.GetComponent<SpriteRenderer>();
                 tileData[x, y].tileID = 0;
@@ -75,8 +75,8 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                float xOffset = (x + y) / 2f;
-                float yOffset = (x - y) / 4f;
+                float xOffset = x;
+                float yOffset = y;
                 tileData[x, y].spriteRenderer.sprite = emptyTile;
                 tileData[x, y].tileID = 0;
                 tileData[x, y].transform.position = new Vector2(xOffset, yOffset);
@@ -100,11 +100,6 @@ public class MapGenerator : MonoBehaviour
             if (curY <= mapHeight - 1)
             {
                 UpdateMap(curX, curY, spriteToUse);
-                // float posY = mapVisuals[curX, curY].gameObject.transform.position.y + pathOffset;
-                // mapVisuals[curX, curY].gameObject.transform.position = new Vector3
-                //     (mapVisuals[curX, curY].gameObject.transform.position.x, posY);
-
-                // mapVisuals[curX, curY].tileType = MapTileData.TileType.PATH;
             }
 
             if (curDirection == CurrentDirection.DOWN)
@@ -136,19 +131,13 @@ public class MapGenerator : MonoBehaviour
             else
             {
                 forceDirectionChange = true;
-                tileData[curX, curY].transform.position = new Vector2(tileData[curX, curY].transform.position.x, tileData[curX, curY].transform.position.y - 0.3f);
-                // mapVisuals[curX, curY].transform.position = new Vector3(
-                //             mapVisuals[curX, curY].transform.position.x,
-                //             mapVisuals[curX, curY].gameObject.transform.position.y - pathOffset);
+                tileData[curX, curY].transform.position = new Vector2(tileData[curX, curY].transform.position.x, tileData[curX, curY].transform.position.y);
             }
         }
         else if (curDirection != CurrentDirection.DOWN)
         {
             forceDirectionChange = true;
-            tileData[curX, curY].transform.position = new Vector2(tileData[curX, curY].transform.position.x, tileData[curX, curY].transform.position.y - 0.3f);
-            // mapVisuals[curX, curY].transform.position = new Vector3(
-            //             mapVisuals[curX, curY].transform.position.x,
-            //             mapVisuals[curX, curY].gameObject.transform.position.y - pathOffset);
+            tileData[curX, curY].transform.position = new Vector2(tileData[curX, curY].transform.position.x, tileData[curX, curY].transform.position.y);
         }
     }
 
@@ -299,7 +288,7 @@ public class MapGenerator : MonoBehaviour
 
     private void UpdateMap(int mapX, int mapY, Sprite spriteToUse)
     {
-        tileData[mapX, mapY].transform.position = new Vector2(tileData[mapX, mapY].transform.position.x, tileData[mapX, mapY].transform.position.y + 0.3f);
+        tileData[mapX, mapY].transform.position = new Vector2(tileData[mapX, mapY].transform.position.x, tileData[mapX, mapY].transform.position.y);
         tileData[mapX, mapY].tileID = 1;
         tileData[mapX, mapY].spriteRenderer.sprite = spriteToUse;
     }
