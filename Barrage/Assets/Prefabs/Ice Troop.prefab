@@ -101,5 +101,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   troopRange: 2
-  aps: 4
-  freezeTime: 1
+  aps: 0.25
+  freezeTime: 0.5

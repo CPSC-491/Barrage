@@ -5,14 +5,16 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] private int hitPoints = 2; //hitpoints
+    [SerializeField] private int hitPoints = 2;
     [SerializeField] private int moneyValue = 50;
+
+    public HealthBar healthBar;
 
     private bool isDestroyed = false;
     public void TakeDmg(int dmg) 
     {
         hitPoints -= dmg;
-
+        healthBar.SetHealth(hitPoints);
         if (hitPoints <= 0 && !isDestroyed) 
         {
             EnemySpawner.onEnemyDestroyed.Invoke();
@@ -20,5 +22,10 @@ public class Health : MonoBehaviour
             isDestroyed = true;
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        healthBar.SetMaxHealth(hitPoints);
     }
 }
