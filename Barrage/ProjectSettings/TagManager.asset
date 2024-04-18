@@ -44,3 +44,6 @@ TagManager:
   - name: Troops
     uniqueID: 4228770525
     locked: 0
+  - name: Enemy
+    uniqueID: 3625709247
+    locked: 0
