@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager main;
 
     public Transform startPoint;
-    public Transform[] path;
+    public List<Transform> path = new List<Transform>();
 
     public int money;
 
@@ -39,5 +40,21 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Not enough Money");
             return false;
         }
+    }
+
+    public void AddPathPoint(Transform newPathPoint)
+    {
+        path.Add(newPathPoint);
+    }
+
+    public void ClearPath()
+    {
+        path.Clear();
+    }
+
+    public void SetPath(List<Transform> newPath)
+    {
+        path = newPath;
+        startPoint = path[0];
     }
 }

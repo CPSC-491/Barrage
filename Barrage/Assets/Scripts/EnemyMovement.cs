@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector2.Distance(target.position, transform.position) <= 0.1f) {
             pathIndex++;
 
-            if (pathIndex == LevelManager.main.path.Length)
+            if (pathIndex == LevelManager.main.path.Count)
             {
                 EnemySpawner.onEnemyDestroyed.Invoke();
                 Destroy(gameObject);

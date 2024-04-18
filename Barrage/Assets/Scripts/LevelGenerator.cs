@@ -9,6 +9,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject tileReference;
     [SerializeField] private Sprite emptyTile, downPath, leftRight, leftDown, rightDown, downLeft, downRight;
 
+    [SerializeField] private Transform pathPointPrefab;
+    private List<Transform> path = new List<Transform>();
+
     private int curX;
     private int curY;
     private Sprite spriteToUse;
@@ -48,9 +51,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                float xOffset = x * 1f;
-                float yOffset = y * 1f;
-                GameObject newTile = Instantiate(tileReference, new Vector2(xOffset, yOffset), Quaternion.identity);
+                GameObject newTile = Instantiate(tileReference, new Vector2(x*1f, y*1f), Quaternion.identity);
                 tileData[x, y].spriteRenderer = newTile.GetComponent<SpriteRenderer>();
                 tileData[x, y].tileID = 0;
                 tileData[x, y].spriteRenderer.sprite = emptyTile;
@@ -60,13 +61,13 @@ public class LevelGenerator : MonoBehaviour
         StartCoroutine(GeneratePath());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RegenerateMap();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        RegenerateMap();
+    //    }
+    //}
 
     void RegenerateMap()
     {
@@ -75,11 +76,9 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                float xOffset = x;
-                float yOffset = y;
                 tileData[x, y].spriteRenderer.sprite = emptyTile;
                 tileData[x, y].tileID = 0;
-                tileData[x, y].transform.position = new Vector2(xOffset, yOffset);
+                tileData[x, y].transform.position = new Vector2(x, y);
             }
         }
         StartCoroutine(GeneratePath());
@@ -89,6 +88,10 @@ public class LevelGenerator : MonoBehaviour
     {
         curX = Random.Range(0, mapWidth);
         curY = 0;
+
+        Transform firstPoint = Instantiate(pathPointPrefab);
+        firstPoint.position = new Vector3(curX, curY - 1, 0);
+        path.Add(firstPoint);
 
         spriteToUse = downPath;
 
@@ -109,6 +112,8 @@ public class LevelGenerator : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
+
+        LevelManager.main.SetPath(path);
     }
 
     private void CheckCurrentDirections()
@@ -291,6 +296,10 @@ public class LevelGenerator : MonoBehaviour
         tileData[mapX, mapY].transform.position = new Vector2(tileData[mapX, mapY].transform.position.x, tileData[mapX, mapY].transform.position.y);
         tileData[mapX, mapY].tileID = 1;
         tileData[mapX, mapY].spriteRenderer.sprite = spriteToUse;
+
+        Transform newPathPoint = Instantiate(pathPointPrefab);
+        newPathPoint.position = new Vector3(mapX, mapY, 0);
+        path.Add(newPathPoint);
     }
 
 }
