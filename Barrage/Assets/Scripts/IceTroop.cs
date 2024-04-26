@@ -40,6 +40,7 @@ public class IceTroop : MonoBehaviour
                 StartCoroutine(ResetEnemySpeed(em));
             }
         }
+        AudioManager.Instance.PlaySFX("IceShoot");
     }
 
     private IEnumerator ResetEnemySpeed(EnemyMovement em)

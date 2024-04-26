@@ -27,18 +27,21 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (troop != null) return;
-
-        TroopTower tempTroop = TroopManager.main.GetSelectedTroop();
-
-        if (tempTroop.cost > LevelManager.main.money) 
+        if (Time.timeScale != 0f)
         {
-            Debug.Log("You cant afford this");
-            return;
+            if (troop != null) return;
+
+            TroopTower tempTroop = TroopManager.main.GetSelectedTroop();
+
+            if (tempTroop.cost > LevelManager.main.money)
+            {
+                Debug.Log("You cant afford this");
+                return;
+            }
+
+            LevelManager.main.SpendMoney(tempTroop.cost);
+
+            troop = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
         }
-
-        LevelManager.main.SpendMoney(tempTroop.cost);
-
-        troop = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
     }
 }

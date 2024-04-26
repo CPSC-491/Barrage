@@ -11,6 +11,7 @@ public class Troop : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private string projectileSFX = "BasicShoot";
 
     [Header("Attribute")]
     [SerializeField] private float troopRange = 3f;
@@ -48,6 +49,7 @@ public class Troop : MonoBehaviour
         GameObject projectileObj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile projectileScript = projectileObj.GetComponent<Projectile>();
         projectileScript.SetTarget(target);
+        AudioManager.Instance.PlaySFX(projectileSFX);
     }
 
     private void FindTarget() 

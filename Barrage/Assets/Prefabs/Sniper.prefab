@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1253812872907050837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,8 +104,8 @@ SpriteRenderer:
   m_SortingLayerID: -66196771
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: -265721255, guid: 7442e113625f9ee40bb68e0f0a9293d6, type: 3}
-  m_Color: {r: 0.17647058, g: 1, b: 0.9544622, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ecdd1b10e7fbf65428ee9468cc9abf30, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -200,7 +200,8 @@ MonoBehaviour:
     m_Bits: 64
   projectilePrefab: {fileID: 2194660673358923830, guid: b3f4eeedc5d1abe45902aae5e8bcb940, type: 3}
   projectileSpawnPoint: {fileID: 4197772480358630138}
-  troopRange: 10
+  projectileSFX: SniperShoot
+  troopRange: 8
   rotationSpeed: 200
   pps: 0.5
 --- !u!1 &5081867598285430165
@@ -276,8 +277,8 @@ SpriteRenderer:
   m_SortingLayerID: -66196771
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -436754826, guid: 7442e113625f9ee40bb68e0f0a9293d6, type: 3}
-  m_Color: {r: 0.1745283, g: 1, b: 0.59759873, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ac6b4135b31d2db47a1f59c92d7053f3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
