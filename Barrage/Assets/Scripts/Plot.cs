@@ -25,10 +25,7 @@ public class Plot : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (Time.timeScale != 0f) 
-        {
-            sr.color = startColor;
-        }
+        sr.color = startColor;
     }
 
     private void OnMouseDown()
