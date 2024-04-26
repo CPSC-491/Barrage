@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSounds:
   - name: Theme
-    clip: {fileID: 8300000, guid: 033766cc31c97904bae4404b8a079544, type: 3}
+    clip: {fileID: 8300000, guid: bfdf6dde5bcc6e043be3a3a79da7d395, type: 3}
   sfxSounds:
   - name: BasicShoot
     clip: {fileID: 8300000, guid: 2198d6318ca5fe64a8431aac97b4328b, type: 3}

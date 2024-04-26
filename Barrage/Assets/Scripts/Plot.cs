@@ -17,12 +17,18 @@ public class Plot : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        sr.color = hoverColor;
+        if(Time.timeScale != 0f)
+        {
+            sr.color = hoverColor;
+        }
     }
 
     private void OnMouseExit()
     {
-        sr.color = startColor;
+        if (Time.timeScale != 0f) 
+        {
+            sr.color = startColor;
+        }
     }
 
     private void OnMouseDown()
