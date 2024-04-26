@@ -61,13 +61,13 @@ public class LevelGenerator : MonoBehaviour
         StartCoroutine(GeneratePath());
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        RegenerateMap();
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            RegenerateMap();
+        }
+    }
 
     void RegenerateMap()
     {
