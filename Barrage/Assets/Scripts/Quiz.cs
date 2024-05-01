@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Networking;
 
 public class Quiz : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Quiz : MonoBehaviour
     // Panels
     public GameObject popUpPanel;
     public TextMeshProUGUI popUpText;
+    public TextMeshProUGUI answerText;
     public TextMeshProUGUI moneyText;
     public GameObject startPanel;
     public GameObject endPanel;
@@ -46,27 +48,27 @@ public class Quiz : MonoBehaviour
         StartCoroutine(FetchQuizData());
     }
 
-    // Function that fetches the questions from the Quiz API
     IEnumerator FetchQuizData()
     {
         string apiURL = "https://opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple";
 
-        // Retrieve questions from API
-        using (var webRequest = new WWW(apiURL))
+        // Create UnityWebRequest
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(apiURL))
         {
-            yield return webRequest;
+            // Send the request
+            yield return webRequest.SendWebRequest();
 
-            // Check if API request is successful
-            if(!string.IsNullOrEmpty(webRequest.error))
+            // Check for errors
+            if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Failed to fetch quiz data: " + webRequest.error);
             }
             else
             {
                 // Deserialize the JSON data
-                quizData = JsonUtility.FromJson<QuizApi>(webRequest.text);
+                quizData = JsonUtility.FromJson<QuizApi>(webRequest.downloadHandler.text);
 
-                // Check if data is null
+                // Check if data is valid
                 if (quizData != null && quizData.results != null)
                 {
                     Debug.Log("Quiz data fetched successfully");
@@ -95,6 +97,9 @@ public class Quiz : MonoBehaviour
             Debug.Log("Question: " + currentQuestion.question);
             questionText.text = currentQuestion.question;
 
+            // Decodes HTML String
+            questionText.text = DecodeHtmlString(currentQuestion.question);
+
             // Put all answers in a list
             List<string> allAnswers = new List<string>();
             allAnswers.Add(currentQuestion.correct_answer);
@@ -112,7 +117,7 @@ public class Quiz : MonoBehaviour
                 TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
 
                 // Assign the answer text to the button text
-                buttonText.text = allAnswers[i];
+                buttonText.text = DecodeHtmlString(allAnswers[i]);
 
                 // Add a click listener to the button
                 int index = i; // Capture current index in a local variable
@@ -172,8 +177,18 @@ public class Quiz : MonoBehaviour
         }
 
         // Display pop-up message based on correctness of question
-        popUpText.text = isCorrect ? "Correct!" : "Incorrect!";
-        popUpText.color = isCorrect ? correctColor : incorrectColor;
+        if(isCorrect == true)
+        {
+            popUpText.text = "Correct!";
+            answerText.text = "";
+        }
+        else
+        {
+            popUpText.text = "Incorrect!";
+            answerText.text = "Correct Answer is " + currentQuestion.correct_answer;
+        }
+        //popUpText.text = isCorrect ? "Correct!" : "Incorrect!";
+        //popUpText.color = isCorrect ? correctColor : incorrectColor;
         popUpPanel.SetActive(true);
 
         StartCoroutine(WaitForPopUp(DisplayQuestion));
@@ -230,6 +245,7 @@ public class Quiz : MonoBehaviour
         startPanel.SetActive(false);
     }
 
+    // Function that watis for user to click on the end panel to head back to the game
     IEnumerator WaitForEndPanel()
     {
         while (!Input.GetMouseButtonDown(0))
@@ -240,6 +256,13 @@ public class Quiz : MonoBehaviour
         // Hide panel
         endPanel.SetActive(false);
     }
+
+    // Decodes HTML characters that may not display correctly
+    string DecodeHtmlString(string text)
+    {
+        return System.Net.WebUtility.HtmlDecode(text);
+    }
+
     // Update is called once per frame
     void Update()
     {
