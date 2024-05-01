@@ -116,7 +116,7 @@ public class Quiz : MonoBehaviour
                 // Get the TextMeshProUGUI component of the current button
                 TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
 
-                // Assign the answer text to the button text
+                // Assign the answer text to the button text and decodes HTML characters
                 buttonText.text = DecodeHtmlString(allAnswers[i]);
 
                 // Add a click listener to the button
