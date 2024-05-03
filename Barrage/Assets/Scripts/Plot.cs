@@ -8,8 +8,11 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
 
-    private GameObject troop;
+    public GameObject troopObj;
+    public Troop troop;
     private Color startColor;
+
+    public bool isValid = true;
 
     private void Start()
     {
@@ -17,10 +20,14 @@ public class Plot : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if(Time.timeScale != 0f)
-        {
-            sr.color = hoverColor;
-        }
+        if (UIManager.main.IsHoveringUI()) return;
+
+        if (Time.timeScale != 0f) return;
+
+        if (!isValid) return;
+
+        sr.color = hoverColor;
+
     }
 
     private void OnMouseExit()
@@ -30,21 +37,29 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Time.timeScale != 0f)
+        if (UIManager.main.IsHoveringUI()) return;
+
+        if (Time.timeScale == 0f) return;
+
+        if (!isValid) return;
+
+        if (troopObj != null) 
         {
-            if (troop != null) return;
-
-            TroopTower tempTroop = TroopManager.main.GetSelectedTroop();
-
-            if (tempTroop.cost > LevelManager.main.money)
-            {
-                Debug.Log("You cant afford this");
-                return;
-            }
-
-            LevelManager.main.SpendMoney(tempTroop.cost);
-
-            troop = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
+            troop.OpenUpgradeUI();
+            return; 
         }
-    }
+
+        TroopTower tempTroop = TroopManager.main.GetSelectedTroop();
+
+        if (tempTroop.cost > LevelManager.main.money)
+        { 
+            Debug.Log("You cant afford this");
+            return;
+        }
+
+        LevelManager.main.SpendMoney(tempTroop.cost);
+
+        troopObj = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
+        troop = troopObj.GetComponent<Troop>();
+        }
 }

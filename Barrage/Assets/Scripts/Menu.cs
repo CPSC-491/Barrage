@@ -19,6 +19,6 @@ public class Menu : MonoBehaviour
 
     private void OnGUI()
     {
-        moneyUI.text = LevelManager.main.money.ToString();
+        moneyUI.text = "Money: " + LevelManager.main.money.ToString();
     }
 }
