@@ -16,13 +16,8 @@ public class Quiz : MonoBehaviour
     public Color defaultColor = Color.white;
 
     // Panels
-    public GameObject popUpPanel;
-    public TextMeshProUGUI popUpText;
-    public TextMeshProUGUI answerText;
-    public TextMeshProUGUI moneyText;
-    public GameObject startPanel;
-    public GameObject endPanel;
-    public TextMeshProUGUI resultsText;
+    public GameObject popUpPanel, startPanel, endPanel;
+    public TextMeshProUGUI popUpText, answerText, moneyText, resultsText;
 
     // Classes and Index
     private Money userMoney;
