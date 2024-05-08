@@ -4071,13 +4071,6 @@ MonoBehaviour:
   warningRegisterText: {fileID: 666141738}
   registerButton: {fileID: 1290649338}
   backToLoginButton: {fileID: 584581371}
-  userDataPanel: {fileID: 2129176052}
-  usernameText: {fileID: 688623162}
-  gradeLevelText: {fileID: 169671582}
-  moneyText: {fileID: 931637575}
-  continueButton: {fileID: 112140573}
-  signOutButton: {fileID: 68767748}
-  saveButton: {fileID: 311467907}
 --- !u!4 &868334225
 Transform:
   m_ObjectHideFlags: 0
@@ -8404,7 +8397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000095367, y: 142.77}
+  m_AnchoredPosition: {x: 0.0000095367, y: 142.77003}
   m_SizeDelta: {x: 200, y: 66.4621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861057714

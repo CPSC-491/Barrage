@@ -163,12 +163,12 @@ public class LoginManager : MonoBehaviour
             //Invoke("GoToMainMenu", 3);
             yield return new WaitForSeconds(3);
 
-            //usernameText.text = User.DisplayName;
+            // usernameText.text = User.DisplayName;
             // gradeLevelText.text = ;
             // Show user data screen
             //GoToUserData();
             ClearRegisterFields();
-            ClearLoginFields();
+            //ClearLoginFields();
         }
     }
 
