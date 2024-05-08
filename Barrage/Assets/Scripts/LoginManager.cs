@@ -28,6 +28,7 @@ public class LoginManager : MonoBehaviour
     public TMP_Text confirmLoginText;
     public Button loginButton;
     public Button goToRegisterButton;
+    public Button playAsGuestButton;
 
     // Register Page
     public GameObject registerPanel;
@@ -87,6 +88,12 @@ public class LoginManager : MonoBehaviour
     {
         // Call the register coroutine passing the email, password, and username
         StartCoroutine(Register(emailRegisterInput.text, passwordRegisterInput.text, usernameRegisterInput.text));
+    }
+
+    // Skips login and goes straight to the game
+    public void PlayAsGuestButton()
+    {
+        StartCoroutine(Guest());
     }
 
     /*
@@ -264,6 +271,16 @@ public class LoginManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Function for the guest
+    public IEnumerator Guest()
+    {
+        confirmLoginText.text = "Playing as Guest!";
+        yield return new WaitForSeconds(3);
+        GoToMainMenu();
+        ClearLoginFields();
+        ClearRegisterFields();
     }
 
     /*
