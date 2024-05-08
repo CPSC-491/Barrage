@@ -38,6 +38,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField confirmPasswordInput;
     public TMP_Dropdown gradeLevelDropdown;
     public TMP_Text warningRegisterText;
+    public TMP_Text confirmRegisterText;
     public Button registerButton, backToLoginButton;
 
     /*
@@ -264,7 +265,8 @@ public class LoginManager : MonoBehaviour
                     // Add grade level to user in the database
 
                     // Return to Login screen
-
+                    confirmRegisterText.text = "Sign Up Successful!";
+                    yield return new WaitForSeconds(3);
                     GoToLogin();
                     ClearRegisterFields();
                     ClearLoginFields();
@@ -400,6 +402,7 @@ public class LoginManager : MonoBehaviour
         passwordRegisterInput.text = "";
         confirmPasswordInput.text = "";
         warningRegisterText.text = "";
+        confirmRegisterText.text = "";
     }
 
     public void GoToMainMenu()
