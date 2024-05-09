@@ -223,6 +223,7 @@ public class Quiz : MonoBehaviour
 
         // Hide panel
         popUpPanel.SetActive(false);
+        gameObject.SetActive(false);
 
         // Call Function
         callBack?.Invoke();
@@ -258,9 +259,8 @@ public class Quiz : MonoBehaviour
         return System.Net.WebUtility.HtmlDecode(text);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetQuestion()
     {
-        
+        gameObject.SetActive(true);
     }
 }

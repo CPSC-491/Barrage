@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class IceTroop : MonoBehaviour
@@ -47,11 +46,5 @@ public class IceTroop : MonoBehaviour
     {
         yield return new WaitForSeconds(freezeTime);
         em.ResetSpeed();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.white;
-        Handles.DrawWireDisc(transform.position, transform.forward, troopRange);
     }
 }

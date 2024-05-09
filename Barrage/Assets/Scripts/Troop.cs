@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class Troop : MonoBehaviour
@@ -130,12 +129,4 @@ public class Troop : MonoBehaviour
     {
         return troopRangeBase * Mathf.Pow(level, 0.4f);
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.white;
-        Handles.DrawWireDisc(transform.position, transform.forward, troopRange);
-    }
-
-
 }
