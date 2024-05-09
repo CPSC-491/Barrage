@@ -22,7 +22,7 @@ public class Plot : MonoBehaviour
     {
         if (UIManager.main.IsHoveringUI()) return;
 
-        if (Time.timeScale != 0f) return;
+        if (Time.timeScale == 0f) return;
 
         if (!isValid) return;
 

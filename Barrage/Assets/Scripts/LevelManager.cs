@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Attributes")]
+    public int playerHP = 100;
+    public HealthBar healthBar;
+    public bool isHPZero = false;
+
     public static LevelManager main;
 
     public Transform startPoint;
@@ -21,7 +26,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        money = 100;
+        money = 225;
+        healthBar.SetMaxHealth(playerHP);
     }
 
     public void IncreaseMoney(int amount) 
@@ -56,5 +62,24 @@ public class LevelManager : MonoBehaviour
     {
         path = newPath;
         startPoint = path[0];
+    }
+
+    public void PlayerTakeDamage(int dmg)
+    {
+        playerHP -= dmg;
+        if (playerHP <= 0)
+        {
+            isHPZero = true;
+            healthBar.SetHealth(0);
+            Debug.Log("Player has died");
+            Time.timeScale = 0f; //pause game
+            Debug.Log("canvas should appear saying player has died");
+        }
+        else
+        {
+            healthBar.SetHealth(playerHP);
+            Debug.Log("Current hp is " + playerHP);
+        }
+
     }
 }

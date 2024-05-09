@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(StartWave());
     }
     private void SpawnEnemy() {
-        int index = Random.Range(0, enemyPrefabs.Length);
+        int index = Random.Range(0, enemyPrefabs.Count);
         GameObject prefabToSpawn = enemyPrefabs[index];
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
