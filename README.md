@@ -35,5 +35,5 @@ Barrage is a 2D Tower Defense game with trivia questions that aims to improve us
 
 ## Joshua Villareal
 - [Email](mailto:jvillareal@csu.fullerton.edu)
-- [LinkedIn](https://www.linkedin.com)
+- [LinkedIn](linkedin.com/in/joshua-villareal-ba4359309)
 - [GitHub](https://github.com/Onceuuu)
