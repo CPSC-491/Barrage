@@ -6,11 +6,9 @@ using UnityEngine.UI;
 using TMPro;
 using Firebase;
 using Firebase.Auth;
-using System.Threading.Tasks;
 using Firebase.Database;
+using System.Threading.Tasks;
 
-// var user = FirebaseAuth.DefaultInstance.CurrentUser;
-// use in other scenes to get user info from firebase
 
 public class LoginManager : MonoBehaviour
 {
@@ -382,6 +380,7 @@ public class LoginManager : MonoBehaviour
     {
         registerPanel.SetActive(true);
         loginPanel.SetActive(false);
+        userDataPanel.SetActive(false);
         emailLoginInput.text = "";
         passwordLoginInput.text = "";
         confirmLoginText.text = "";
@@ -392,6 +391,7 @@ public class LoginManager : MonoBehaviour
     {
         loginPanel.SetActive(true);
         registerPanel.SetActive(false);
+        userDataPanel.SetActive(false);
         emailRegisterInput.text = "";
         usernameRegisterInput.text = "";
         passwordRegisterInput.text = "";

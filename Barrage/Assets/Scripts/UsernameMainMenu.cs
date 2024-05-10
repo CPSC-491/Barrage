@@ -20,7 +20,7 @@ public class UsernameMainMenu : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        // Check if a user is authenticated
+        // Check if a user is logged in
         FirebaseUser user = auth.CurrentUser;
         if (user != null)
         {
