@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Plot : MonoBehaviour
@@ -7,6 +8,7 @@ public class Plot : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
+    [SerializeField] private Sprite emptyTile;
 
     public GameObject troopObj;
     public Troop troop;
@@ -17,14 +19,11 @@ public class Plot : MonoBehaviour
     private void Start()
     {
         startColor = sr.color;
+        Invoke("CheckIfTileValid", 2.5f);
     }
     private void OnMouseEnter()
     {
-        if (UIManager.main.IsHoveringUI()) return;
-
-        if (Time.timeScale == 0f) return;
-
-        if (!isValid) return;
+        if (UIManager.main.IsHoveringUI() || Time.timeScale == 0f || !isValid) return;
 
         sr.color = hoverColor;
 
@@ -37,11 +36,7 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (UIManager.main.IsHoveringUI()) return;
-
-        if (Time.timeScale == 0f) return;
-
-        if (!isValid) return;
+        if (UIManager.main.IsHoveringUI() || Time.timeScale == 0f || !isValid) return;
 
         if (troopObj != null) 
         {
@@ -61,5 +56,13 @@ public class Plot : MonoBehaviour
 
         troopObj = Instantiate(tempTroop.prefab, transform.position, Quaternion.identity);
         troop = troopObj.GetComponent<Troop>();
+    }
+
+    public void CheckIfTileValid()
+    {
+        if (sr.sprite != emptyTile)
+        {
+            isValid = false;
         }
+    }
 }

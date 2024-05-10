@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public int playerHP = 100;
     public HealthBar healthBar;
     public bool isHPZero = false;
+    public int currentWave = 1;
 
     public static LevelManager main;
 
@@ -21,6 +22,10 @@ public class LevelManager : MonoBehaviour
     public List<Transform> path = new List<Transform>();
 
     public int money;
+    public int maxQuestions = 3;
+
+    [SerializeField] public GameObject gameOverScreen;
+    [SerializeField] public GameObject gameWonScreen;
 
 
     private void Awake()
@@ -75,15 +80,39 @@ public class LevelManager : MonoBehaviour
         {
             isHPZero = true;
             healthBar.SetHealth(0);
-            Debug.Log("Player has died");
-            Time.timeScale = 0f; //pause game
-            Debug.Log("canvas should appear saying player has died");
+            GameOver();
         }
         else
         {
             healthBar.SetHealth(playerHP);
             Debug.Log("Current hp is " + playerHP);
         }
+    }
 
+    public void IncreaseWave()
+    {
+        if (currentWave > 10)
+        {
+            GameWon();
+        }
+        currentWave++;
+        maxQuestions = 3;
+    }
+
+    public void DecreaseQuestion()
+    {
+        maxQuestions--;
+    }
+
+    public void GameOver()
+    {
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void GameWon()
+    {
+        gameWonScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

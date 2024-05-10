@@ -145,3 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 4976614878401857251}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  emptyTile: {fileID: -230263671, guid: 28ccd0b7536001745b46a888ec40a348, type: 3}
+  troopObj: {fileID: 0}
+  troop: {fileID: 0}
+  isValid: 1

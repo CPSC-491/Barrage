@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriviaData : MonoBehaviour
+[System.Serializable]
+public class TriviaData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int subjectIndex;
+    public int difficultyIndex;
 
-    // Update is called once per frame
-    void Update()
+    public string subject;
+    public string difficulty;
+
+    public TriviaData(TriviaSettings settings)
     {
-        
+        subjectIndex = settings.subjectIndex;
+        difficultyIndex = settings.difficultyIndex;
+        subject = settings.subject;
+        difficulty = settings.difficulty;
     }
 }

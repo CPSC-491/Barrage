@@ -17,16 +17,20 @@ public class Quiz : MonoBehaviour
 
     // Panels
     public GameObject popUpPanel, startPanel, endPanel;
-    public TextMeshProUGUI popUpText, answerText, moneyText, resultsText;
+    public TextMeshProUGUI popUpText, answerText, resultsText;
 
     // Classes and Index
-    private Money userMoney;
+    //private Money userMoney;
     private QuizApi quizData;
     private int currentQuestionIndex;
+
+    private int subjectIndex;
+    private string difficulty;
 
     // Start is called before the first frame update
     void Start()
     {
+        LoadSettings();
         // Deactivate pop-up and end panels
         popUpPanel.SetActive(false);
         endPanel.SetActive(false);
@@ -36,16 +40,23 @@ public class Quiz : MonoBehaviour
         StartCoroutine(WaitForStartPanel());
 
         // Initialize money class
-        userMoney = new Money();
-        userMoney.setBalance(0);
+        //userMoney = new Money();
+        //userMoney.setBalance(0);
         currentQuestionIndex = 0;
 
         StartCoroutine(FetchQuizData());
     }
-
+    public void LoadSettings()
+    {
+        TriviaData data = SaveTriviaSettings.LoadTSettings();
+        subjectIndex = data.subjectIndex + 9;
+        difficulty = data.difficulty;
+    }
     IEnumerator FetchQuizData()
     {
-        string apiURL = "https://opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple";
+        string apiURL = "https://opentdb.com/api.php?amount=30&category=" + subjectIndex.ToString() + "&difficulty=" + difficulty.ToLower() + "&type=multiple";
+        //string apiURL = "https://opentdb.com/api.php?amount=10&category=17&difficulty=hard&type=multiple";
+
 
         // Create UnityWebRequest
         using (UnityWebRequest webRequest = UnityWebRequest.Get(apiURL))
@@ -127,7 +138,7 @@ public class Quiz : MonoBehaviour
         else
         {
             // Display results
-            DisplayResult(userMoney.getBalance().ToString());
+            //DisplayResult(userMoney.getBalance().ToString());
             endPanel.SetActive(true);
             //StartCoroutine(WaitForEndPanel());
         }
@@ -161,10 +172,10 @@ public class Quiz : MonoBehaviour
                 if (isCorrect == true)
                 {
                     buttonImage.color = correctColor;
-
+                    LevelManager.main.IncreaseMoney(100);
                     // Add 100 coins to user balance
-                    userMoney.AddMoney(100);
-                    UpdateMoneyText();
+                    //userMoney.AddMoney(100);
+                    //UpdateMoneyText();
                 }
                 else
                     buttonImage.color = incorrectColor;
@@ -203,7 +214,7 @@ public class Quiz : MonoBehaviour
     // Updates money UI
     void UpdateMoneyText()
     {
-        moneyText.text = userMoney.getBalance().ToString();
+        //moneyText.text = userMoney.getBalance().ToString();
     }
 
     // Function to display a message on the panel
@@ -224,6 +235,7 @@ public class Quiz : MonoBehaviour
         // Hide panel
         popUpPanel.SetActive(false);
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
 
         // Call Function
         callBack?.Invoke();
@@ -261,6 +273,14 @@ public class Quiz : MonoBehaviour
 
     public void GetQuestion()
     {
-        gameObject.SetActive(true);
+        if (LevelManager.main.maxQuestions <= 0)
+        {
+            return;
+        } else
+        {
+            LevelManager.main.DecreaseQuestion();
+            gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 }
