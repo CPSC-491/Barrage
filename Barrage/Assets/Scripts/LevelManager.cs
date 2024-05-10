@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
+using System.Threading.Tasks;
 
 public class LevelManager : MonoBehaviour
 {

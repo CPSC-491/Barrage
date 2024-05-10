@@ -7,7 +7,7 @@ using TMPro;
 using Firebase;
 using Firebase.Auth;
 using System.Threading.Tasks;
-//using Firebase.Database;
+using Firebase.Database;
 
 // var user = FirebaseAuth.DefaultInstance.CurrentUser;
 // use in other scenes to get user info from firebase
@@ -18,7 +18,7 @@ public class LoginManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser User;
-    //public DatabaseReference DBreference;
+    public DatabaseReference DBreference;
 
     // Login Page
     public GameObject loginPanel;
@@ -36,19 +36,17 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField usernameRegisterInput;
     public TMP_InputField passwordRegisterInput;
     public TMP_InputField confirmPasswordInput;
-    public TMP_Dropdown gradeLevelDropdown;
     public TMP_Text warningRegisterText;
     public TMP_Text confirmRegisterText;
     public Button registerButton, backToLoginButton;
 
-    /*
+    
     // User Data Page
     public GameObject userDataPanel;
     public TMP_InputField usernameText;
     public TMP_InputField gradeLevelText;
-    public TMP_InputField moneyText;
     public Button continueButton, signOutButton, saveButton;
-    */
+    
 
     void Awake()
     {
@@ -74,7 +72,7 @@ public class LoginManager : MonoBehaviour
         Debug.Log("Setting up Firebase Auth");
         // Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
-        //DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     // Function for login button
@@ -97,30 +95,33 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(Guest());
     }
 
-    /*
+    
     // Function for save button
     public void SaveDataButton()
     {
         StartCoroutine(UpdateUsernameAuth(usernameText.text));
         StartCoroutine(UpdateUsernameDatabase(usernameText.text));
 
-        //StartCoroutine(UpdateGradeLevel(int.Parse(gradeLevelText.text)));
-        //StartCoroutine(UpdateMoney(int.Parse(moneyText.text)));
+        StartCoroutine(UpdateGradeLevel(gradeLevelText.text));
     }
 
     
     // Function for the sign out button
     public void SignOutButton()
     {
-
+        auth.SignOut();
+        GoToLogin();
+        ClearRegisterFields();
+        ClearLoginFields();
+        ClearDataFields();
     }
 
     // Function for the continue button
     public void ContinueButton()
     {
-        
+        GoToMainMenu();
     }
-    */
+    
 
     // Login function
     private IEnumerator Login(string _email, string _password)
@@ -171,12 +172,11 @@ public class LoginManager : MonoBehaviour
             //Invoke("GoToMainMenu", 3);
             yield return new WaitForSeconds(3);
 
-            // usernameText.text = User.DisplayName;
-            // gradeLevelText.text = ;
             // Show user data screen
-            //GoToUserData();
+            usernameText.text = User.DisplayName;
+            GoToUserData();
             ClearRegisterFields();
-            //ClearLoginFields();
+            ClearLoginFields();
         }
     }
 
@@ -257,16 +257,10 @@ public class LoginManager : MonoBehaviour
 
                     // Username is set
                     warningRegisterText.text = "";
-                    // Retrieve Grade Level Selection
-                    int selectedIndex = gradeLevelDropdown.value;
-                    string selectedOption = gradeLevelDropdown.options[selectedIndex].text;
-                    //UpdateGradeLevel(int.Parse(selectedOption));
-
-                    // Add grade level to user in the database
 
                     // Return to Login screen
                     confirmRegisterText.text = "Sign Up Successful!";
-                    yield return new WaitForSeconds(3);
+                    yield return new WaitForSeconds(2);
                     GoToLogin();
                     ClearRegisterFields();
                     ClearLoginFields();
@@ -285,7 +279,7 @@ public class LoginManager : MonoBehaviour
         ClearRegisterFields();
     }
 
-    /*
+    
     // Updates username
     private IEnumerator UpdateUsernameAuth(string _username)
     {
@@ -293,7 +287,7 @@ public class LoginManager : MonoBehaviour
         UserProfile profile = new UserProfile { DisplayName = _username };
 
         // Call the Firebase auth update user profile function passing the profile with the name
-        var ProfileTask = User.UpdateUserProfileAsync(profile);
+        Task ProfileTask = User.UpdateUserProfileAsync(profile);
         // wait until the task completes
         yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
 
@@ -325,9 +319,9 @@ public class LoginManager : MonoBehaviour
     }
 
     // Updates the user's grade level
-    private IEnumerator UpdateGradeLevel(int _gradeLevel)
+    private IEnumerator UpdateGradeLevel(string _gradeLevel)
     {
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Grade Level").SetValueAsync(_gradeLevel);
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Grade_Level").SetValueAsync(_gradeLevel);
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -357,7 +351,31 @@ public class LoginManager : MonoBehaviour
             // Money is now updated in the database
         }
     }
-    */
+    
+    private IEnumerator LoadUserData()
+    {
+        // Get the currently logged in user data
+        Task<DataSnapshot> DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No data exists yet
+            gradeLevelText.text = "";
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+            gradeLevelText.text = snapshot.Child("Grade_Level").Value.ToString();
+            // usernameText.text = snapshot.Child("Username").Value.ToString();
+        }
+    }
 
     // UI Functions
     public void GoToRegister()
@@ -379,14 +397,15 @@ public class LoginManager : MonoBehaviour
         passwordRegisterInput.text = "";
         confirmPasswordInput.text = "";
     }
-    /*
+    
     public void GoToUserData()
     {
+        StartCoroutine(LoadUserData());
         loginPanel.SetActive(false);
         registerPanel.SetActive(false);
         userDataPanel.SetActive(true);
     }
-    */
+    
     public void ClearLoginFields()
     {
         emailLoginInput.text = "";
@@ -403,6 +422,12 @@ public class LoginManager : MonoBehaviour
         confirmPasswordInput.text = "";
         warningRegisterText.text = "";
         confirmRegisterText.text = "";
+    }
+
+    public void ClearDataFields()
+    {
+        usernameText.text = "";
+        gradeLevelText.text = "";
     }
 
     public void GoToMainMenu()
