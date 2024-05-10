@@ -382,6 +382,7 @@ public class LoginManager : MonoBehaviour
     {
         registerPanel.SetActive(true);
         loginPanel.SetActive(false);
+        userDataPanel.SetActive(false);
         emailLoginInput.text = "";
         passwordLoginInput.text = "";
         confirmLoginText.text = "";
@@ -392,6 +393,7 @@ public class LoginManager : MonoBehaviour
     {
         loginPanel.SetActive(true);
         registerPanel.SetActive(false);
+        userDataPanel.SetActive(false);
         emailRegisterInput.text = "";
         usernameRegisterInput.text = "";
         passwordRegisterInput.text = "";
