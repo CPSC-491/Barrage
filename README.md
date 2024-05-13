@@ -1,7 +1,7 @@
 # Barrage
 
 # Description
-Barrage is a 2D Tower Defense game with trivia questions that aims to improve user's knowledge and what they know. With multiple different types of troops, users can have fun experimenting with different map layouts and troop placements. 
+Barrage is a 2D Tower Defense game with trivia questions that aim to improve users' knowledge and what they know. With multiple different types of troops, users can have fun experimenting with different map layouts and troop placements. 
 
 # Installation
 
@@ -9,13 +9,16 @@ Barrage is a 2D Tower Defense game with trivia questions that aims to improve us
 
 
 # Local Installation
+To play the game, unzip the barrage.zip file on the itch.io page. Run the barrage.exe file.
 
+To open the Unity Project in Unity, install Firebase SDK for Firebase authentication and Firebase Database using the instructions from this [page](https://firebase.google.com/docs/unity/setup). 
+You can open the project without the Firebase files. However, the login scene will only work with these files.
 
 # Tools Used
 - [Unity](https://unity.com/)
+- [Firebase](https://firebase.google.com/)
 
-
-### Languages/Frameworks
+### Languages
 - [C#](https://learn.microsoft.com/en-us/dotnet/csharp/)
 
 # API
