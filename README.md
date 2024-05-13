@@ -11,8 +11,8 @@ Barrage is a 2D Tower Defense game with trivia questions that aim to improve use
 # Local Installation
 To play the game, unzip the barrage.zip file on the itch.io page. Run the barrage.exe file.
 
-To open the Unity Project in Unity, install Firebase SDK for Firebase authentication and Firebase Database using the instructions from this [page](https://firebase.google.com/docs/unity/setup). 
-You can open the project without the Firebase files. However, the login scene will only work with these files.
+To open the project in Unity, install Firebase SDK for Firebase authentication and Firebase Database using the instructions from this [page](https://firebase.google.com/docs/unity/setup). 
+You can open the project without the Firebase files. However, the login scene will not work without these files.
 
 # Tools Used
 - [Unity](https://unity.com/)
